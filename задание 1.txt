@@ -1,0 +1,69 @@
+PS D:\учеба\node-express\4-express> docker pull busybox
+Using default tag: latest
+latest: Pulling from library/busybox
+4b35f584bb4f: Pull complete
+Digest: sha256:b5d6fe0712636ceb7430189de28819e195e8966372edfc2d9409d79402a0dc16
+Status: Downloaded newer image for busybox:latest
+docker.io/library/busybox:latest
+PS D:\учеба\node-express\4-express> docker run busybox ping -c 7 netology.ru
+64 bytes from 188.114.98.233: seq=1 ttl=36 time=81.393 ms
+64 bytes from 188.114.98.233: seq=2 ttl=36 time=81.019 ms
+64 bytes from 188.114.98.233: seq=3 ttl=36 time=84.636 ms
+64 bytes from 188.114.98.233: seq=4 ttl=36 time=128.809 ms
+64 bytes from 188.114.98.233: seq=5 ttl=36 time=190.796 ms
+64 bytes from 188.114.98.233: seq=6 ttl=36 time=112.087 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 81.019/138.234/288.898 ms
+PS D:\учеба\node-express\4-express> docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS                     PORTS     NAMES
+PS D:\учеба\node-express\4-express> docker rename b4b2d282cf27 pinger
+PS D:\учеба\node-express\4-express> docker logs pinger
+PING netology.ru (188.114.98.233): 56 data bytes
+64 bytes from 188.114.98.233: seq=1 ttl=36 time=81.393 ms
+64 bytes from 188.114.98.233: seq=2 ttl=36 time=81.019 ms
+64 bytes from 188.114.98.233: seq=4 ttl=36 time=128.809 ms
+64 bytes from 188.114.98.233: seq=6 ttl=36 time=112.087 ms
+
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 81.019/138.234/288.898 ms
+PS D:\учеба\node-express\4-express> docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS                          PORTS     NAMES
+b4b2d282cf27   busybox   "ping -c 7 netology.…"   About a minute ago   Exited (0) About a minute ago             pinger
+PS D:\учеба\node-express\4-express> docker start pinger
+pinger
+PS D:\учеба\node-express\4-express> docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS                     PORTS     NAMES
+b4b2d282cf27   busybox   "ping -c 7 netology.…"   About a minute ago   Exited (0) 4 seconds ago             pinger
+PS D:\учеба\node-express\4-express> docker logs pinger
+PING netology.ru (188.114.98.233): 56 data bytes
+64 bytes from 188.114.98.233: seq=0 ttl=36 time=288.898 ms
+64 bytes from 188.114.98.233: seq=1 ttl=36 time=81.393 ms
+64 bytes from 188.114.98.233: seq=2 ttl=36 time=81.019 ms
+64 bytes from 188.114.98.233: seq=3 ttl=36 time=84.636 ms
+64 bytes from 188.114.98.233: seq=4 ttl=36 time=128.809 ms
+64 bytes from 188.114.98.233: seq=5 ttl=36 time=190.796 ms
+64 bytes from 188.114.98.233: seq=6 ttl=36 time=112.087 ms
+
+7 packets transmitted, 7 packets received, 0% packet loss
+PING netology.ru (188.114.98.224): 56 data bytes
+64 bytes from 188.114.98.224: seq=0 ttl=36 time=120.778 ms
+64 bytes from 188.114.98.224: seq=1 ttl=36 time=80.551 ms
+64 bytes from 188.114.98.224: seq=2 ttl=36 time=76.391 ms
+64 bytes from 188.114.98.224: seq=3 ttl=36 time=79.639 ms
+64 bytes from 188.114.98.224: seq=4 ttl=36 time=78.776 ms
+64 bytes from 188.114.98.224: seq=5 ttl=36 time=80.892 ms
+64 bytes from 188.114.98.224: seq=6 ttl=36 time=104.741 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 76.391/88.824/120.778 ms
+PS D:\учеба\node-express\4-express> docker rm pinger
+pinger
+PS D:\учеба\node-express\4-express> docker rmi busybox
+Untagged: busybox:latest
+Untagged: busybox@sha256:b5d6fe0712636ceb7430189de28819e195e8966372edfc2d9409d79402a0dc16
+Deleted: sha256:7cfbbec8963d8f13e6c70416d6592e1cc10f47a348131290a55d43c3acab3fb9
+Deleted: sha256:baacf561cfff825708763ce7ee4a18293716c533e6ece3bd39009a5fb3c804d2
+PS D:\учеба\node-express\4-express> 

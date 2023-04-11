@@ -1,0 +1,26 @@
+PS D:\учеба\node-express\6-docker> docker run --name first_node -v D:\учеба\node-express\6-docker\data:/var/first/data -i -d node:15.14     
+dbfeeecfc413b30af8dacf8afbc2342ce44f8ab55fcf7d9dc07f186a8009e6f6
+PS D:\учеба\node-express\6-docker>  docker run --name second_node -v D:\учеба\node-express\6-docker\data:/var/second/data -i -d node:15.14  
+7eb7ebe2b650fa9ea03345bebea5a04ad9b0bcf5f50ff2416b69792413fbf51b
+PS D:\учеба\node-express\6-docker> docker exec -it first_node bash
+root@dbfeeecfc413:/# cd var/first/data
+root@dbfeeecfc413:/var/first/data# touch test.txt
+root@dbfeeecfc413:/var/first/data# echo 'Hello, World!' >> test.txt
+root@dbfeeecfc413:/var/first/data# exit
+exit
+PS D:\учеба\node-express\6-docker> docker exec -it second_node bash
+root@7eb7ebe2b650:/# ls var/second/data
+test.txt  test2.txt
+root@7eb7ebe2b650:/# cat var/second/data/test.txt
+Hello, World!
+root@7eb7ebe2b650:/# cat var/second/data/test2.txt
+root@7eb7ebe2b650:/# 
+root@7eb7ebe2b650:/# exit
+exit
+PS D:\учеба\node-express\6-docker> docker stop first_node second_node
+first_node
+second_node
+PS D:\учеба\node-express\6-docker> docker rm first_node second_node
+first_node
+second_node
+PS D:\учеба\node-express\6-docker> 
